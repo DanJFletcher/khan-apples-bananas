@@ -7,6 +7,18 @@
  }
 
 var headCode = $doc.context.head.innerHTML;
+
+// common selectors that students try to use
+var elementSelectors = ["h1", "h2", "h3", "p", "strong", "div"];
+
+var usedElementSelector = function() {
+    for (s in elementSelectors) {
+        if (headCode.indexOf(s) !== -1) {
+            return true;
+        }
+    }
+    return false;
+}
  
 staticTest($._("Color those classes"), function() {
     var result = null;
@@ -41,6 +53,8 @@ staticTest($._("Color those classes"), function() {
             result = fail($._("Does the text look colored? Think carefully about how to select elements based on class name and double-check your selectors."));
         } else if (regex.hasID.test(headCode)) {
             result = fail($._("It looks like you are trying to use an `ID` selector instead of a `class` selector."));
+        } else if (usedElementSelector()) {
+            result = fail($._("It looks like you are trying to use an `element` slector instead of a `class` selector."));
         }
     }
     assertMatch(result, descrip, displayP);
