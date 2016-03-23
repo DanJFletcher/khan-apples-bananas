@@ -5,15 +5,23 @@ staticTest($._("Color those classes"), function() {
     var displayP = " _ {\n   _: _;\n }"; 
     
     var applesColorP = ".apples { color: $color; }";
-    var applesBackgroundP = ".apples { background-color: $color; }";
+    var applesBackgroundColorP = ".apples { background-color: $color; }";
+    var applesBackgroundP = ".apples { background: $color; }";
     var bananasColorP = ".bananas { color: $color; }";
-    var bananasBackgroundP = ".bananas { background-color: $color; }";
+    var bananasBackgroundColorP = ".bananas { background-color: $color; }";
+    var bananasBackgroundP = ".bananas { background: $color; }";
+    
     
     result = allPass(
+        
         anyPass(cssMatch(applesColorP, isValidColor("$color")),
+                cssMatch(applesBackgroundColorP, isValidColor("$color")),
                 cssMatch(applesBackgroundP, isValidColor("$color"))),
+                
         anyPass(cssMatch(bananasColorP, isValidColor("$color")),
-                cssMatch(bananasBackgroundP, isValidColor("$color"))));
+                cssMatch(bananasBackgroundColorP, isValidColor("$color")),
+                cssMatch(bananasBackgroundP, isValidColor("$color")))
+            );
     
     var applesIdP = "#apples { }";
     var bananasIdP = "#bananas { }";
