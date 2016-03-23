@@ -1,3 +1,13 @@
+/**************************
+ * Regex Checks
+ * ************************/
+ regex = {
+     // matches for id selectors
+     hasID: /(\#[a-z]*)\s*\{/i
+ }
+
+var headCode = $doc.context.head.innerHTML;
+ 
 staticTest($._("Color those classes"), function() {
     var result = null;
     var descrip = $._("This webpage displays the lyrics for a song about apples and bananas. There are already classes on most of the words about apples and bananas, but there is no style for those classes yet. Add two style rules, one that sets a color for the 'apples' class and another that sets a color for the 'bananas' class.");
@@ -25,9 +35,12 @@ staticTest($._("Color those classes"), function() {
     
     var applesIdP = "#apples { }";
     var bananasIdP = "#bananas { }";
+    console.log(headCode.charCodeAt(35));
     if (fails(result)) {
         if (cssMatches(applesIdP) || cssMatches(bananasIdP)) {
             result = fail($._("Does the text look colored? Think carefully about how to select elements based on class name and double-check your selectors."));
+        } else if (regex.hasID.test(headCode)) {
+            result = fail($._("It looks like you are trying to use an `ID` selector instead of a `class` selector."));
         }
     }
     assertMatch(result, descrip, displayP);
