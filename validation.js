@@ -53,7 +53,7 @@ staticTest($._("Color those classes"), function() {
     
     var applesIdP = "#apples { }";
     var bananasIdP = "#bananas { }";
-    console.log(headCode.charCodeAt(35));
+    
     if (fails(result)) {
         if (cssMatches(applesIdP) || cssMatches(bananasIdP)) {
             result = fail($._("Does the text look colored? Think carefully about how to select elements based on class name and double-check your selectors."));
