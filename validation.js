@@ -3,7 +3,10 @@
  * ************************/
  regex = {
      // matches for id selectors
-     hasID: /(\#[a-z]*)\s*\{/i
+     hasID: /(\#[a-z]*)\s*\{/i,
+     
+     // matches for class selectors
+     hasClass: /(\.[a-z]*)\s*\{/i
  }
 
 var headCode = $doc.context.head.innerHTML;
@@ -33,6 +36,9 @@ staticTest($._("Color those classes"), function() {
     var bananasBackgroundColorP = ".bananas { background-color: $color; }";
     var bananasBackgroundP = ".bananas { background: $color; }";
     
+    var applesP = ".apples {}";
+    var bananasP = ".bananas {}";
+    
     
     result = allPass(
         
@@ -53,6 +59,8 @@ staticTest($._("Color those classes"), function() {
             result = fail($._("Does the text look colored? Think carefully about how to select elements based on class name and double-check your selectors."));
         } else if (regex.hasID.test(headCode)) {
             result = fail($._("It looks like you are trying to use an `ID` selector instead of a `class` selector."));
+        } else if ((!cssMatches(applesP) && !cssMatches(bananasP)) && (regex.hasClass.test(headCode) && !cssMatches(applesP))) {
+            result = fail($._("You're using a `class` selector, which is correct. But check the name you're using. Does it match with the class names in the HTML?"));
         } else if (usedElementSelector()) {
             result = fail($._("It looks like you are trying to use an `element` slector instead of a `class` selector."));
         }
