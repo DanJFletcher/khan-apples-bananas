@@ -70,8 +70,8 @@ staticTest($._("Color those classes"), function() {
 
 staticTest($._("Add more classes"), function() {
     var result = null;
-    var descrip = $._("The final line of the song has no classes! Add the 'apples' class to the first `<*strong*>` in it, and the 'bananas' class to the second `<*strong*>` in it.");
-    var displayP = "<strong _=\"...\"></strong>"; 
+    var descrip = $._("The final line of the song has no *classes* on the `<*strong*>` tags! Add the 'apples' class to the first `<*strong*>` in that line, and the 'bananas' class to the second `<*strong*>` in it.");
+    var displayP = "I like to eat eat eat\n  <strong _=\"...\">apples</strong> and..."; 
     
     result = allPass(
         htmlMatch({"p strong.apples:not(:empty)": 13}),
